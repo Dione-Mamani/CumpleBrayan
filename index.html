@@ -59,7 +59,21 @@
       background-color: #00cccc;
     }
 
-    /* Estilo del modal */
+    /* Flecha animada */
+    #arrow {
+      margin-top: 10px;
+      animation: bounce 1s infinite;
+      font-size: 2em;
+      color: #00ffff;
+      display: none;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -121,6 +135,7 @@
     <div id="surprise">
       <div id="message">¡Feliz cumpleaños Brayan!</div>
       <img id="komodo" src="3cj8jo.gif" alt="Komodo de Mecanimales"/>
+      <div id="arrow">⬇️</div>
       <div id="finalMessage">
         Sabes que eres una persona demasiado especial. Mereces todo lo bueno que este mundo tiene para ofrecer. ¡Te quiero muchísimo! Felices 20 primaveras, hermosa vuelta al sol.<br><br>— Atte: Dione
       </div>
@@ -128,7 +143,7 @@
   </div>
 
   <!-- Modal -->
-  <div id="myModal" class="modal">
+  <div id="myModal" class="modal" style="display: none;">
     <div class="modal-content">
       <p>En el regalo está la clave</p>
       <input type="password" id="password" maxlength="8" placeholder="Ingresa la clave"/>
@@ -146,10 +161,12 @@
     const modal = document.getElementById('myModal');
     const errorMsg = document.getElementById('errorMsg');
     const finalMessage = document.getElementById('finalMessage');
+    const arrow = document.getElementById('arrow');
 
     button.addEventListener('click', () => {
       button.style.display = 'none';
       surprise.style.display = 'flex';
+      arrow.style.display = 'block';
       confetti({
         particleCount: 150,
         spread: 70,
@@ -158,6 +175,7 @@
     });
 
     komodo.addEventListener('click', () => {
+      arrow.style.display = 'none';
       modal.style.display = 'flex';
     });
 
