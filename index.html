@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>¡Feliz Cumpleaños Brayan!</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #1e1e2f, #2a2a3d);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      color: white;
+    }
+
+    #container {
+      text-align: center;
+    }
+
+    #surprise {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #message {
+      font-size: 2.5em;
+      color: #00ffff;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+      margin-top: 20px;
+    }
+
+    #komodo {
+      width: 300px;
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #00ffff;
+    }
+
+    #clickButton {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background-color: #00ffff;
+      color: #1e1e2f;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00ffff;
+      transition: background-color 0.3s;
+    }
+
+    #clickButton:hover {
+      background-color: #00cccc;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <button id="clickButton">Haz clic aquí</button>
+    <div id="surprise">
+      <div id="message">¡Feliz cumpleaños Brayan!</div>
+      <img id="komodo" src="https://media.tenor.com/7Yw3n3e2g6gAAAAC/animal-mechanicals-komodo.gif" alt="Komodo de Mecanimales"/>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    const button = document.getElementById('clickButton');
+    const surprise = document.getElementById('surprise');
+
+    button.addEventListener('click', () => {
+      button.style.display = 'none';
+      surprise.style.display = 'flex';
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+    });
+  </script>
+</body>
+</html>
