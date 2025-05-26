@@ -40,6 +40,7 @@
       margin-top: 20px;
       border-radius: 10px;
       box-shadow: 0 0 20px #00ffff;
+      cursor: pointer;
     }
 
     #clickButton {
@@ -57,6 +58,61 @@
     #clickButton:hover {
       background-color: #00cccc;
     }
+
+    /* Estilo del modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: #1e1e2f;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 0 20px #00ffff;
+    }
+
+    .modal input {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      margin-top: 10px;
+      width: 150px;
+      text-align: center;
+    }
+
+    .modal button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: none;
+      background-color: #00ffff;
+      color: #1e1e2f;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .modal button:hover {
+      background-color: #00cccc;
+    }
+
+    #finalMessage {
+      display: none;
+      font-size: 1.8em;
+      color: #00ffff;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+      margin-top: 20px;
+      max-width: 500px;
+    }
   </style>
 </head>
 <body>
@@ -64,7 +120,21 @@
     <button id="clickButton">Haz clic aquí</button>
     <div id="surprise">
       <div id="message">¡Feliz cumpleaños Brayan!</div>
-      <img id="komodo" src="https://media.tenor.com/7Yw3n3e2g6gAAAAC/animal-mechanicals-komodo.gif" alt="Komodo de Mecanimales"/>
+      <img id="komodo" src="3cj8jo.gif" alt="Komodo de Mecanimales"/>
+      <div id="finalMessage">
+        Sabes que eres una persona demasiado especial. Mereces todo lo bueno que este mundo tiene para ofrecer. ¡Te quiero muchísimo! Felices 20 primaveras, hermosa vuelta al sol.<br><br>— Atte: Dione
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <p>En el regalo está la clave</p>
+      <input type="password" id="password" maxlength="8" placeholder="Ingresa la clave"/>
+      <br>
+      <button onclick="checkPassword()">Verificar</button>
+      <div id="errorMsg" style="color:#ff4d4d; margin-top:5px;"></div>
     </div>
   </div>
 
@@ -72,6 +142,10 @@
   <script>
     const button = document.getElementById('clickButton');
     const surprise = document.getElementById('surprise');
+    const komodo = document.getElementById('komodo');
+    const modal = document.getElementById('myModal');
+    const errorMsg = document.getElementById('errorMsg');
+    const finalMessage = document.getElementById('finalMessage');
 
     button.addEventListener('click', () => {
       button.style.display = 'none';
@@ -82,6 +156,27 @@
         origin: { y: 0.6 }
       });
     });
+
+    komodo.addEventListener('click', () => {
+      modal.style.display = 'flex';
+    });
+
+    function checkPassword() {
+      const pass = document.getElementById('password').value;
+      if (pass === '03062025') {
+        modal.style.display = 'none';
+        finalMessage.style.display = 'block';
+      } else {
+        errorMsg.textContent = 'No es correcto, intenta de nuevo cumpleañero 🙃';
+      }
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+        errorMsg.textContent = '';
+      }
+    }
   </script>
 </body>
 </html>
