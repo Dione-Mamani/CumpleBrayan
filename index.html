@@ -10,15 +10,16 @@
       margin: 0;
       background: linear-gradient(135deg, #1e1e2f, #2a2a3d);
       font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       overflow: hidden;
       color: white;
     }
 
     #container {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
       text-align: center;
     }
 
@@ -59,7 +60,6 @@
       background-color: #00cccc;
     }
 
-    /* Flecha animada */
     #arrow {
       margin-top: 10px;
       animation: bounce 1s infinite;
@@ -73,11 +73,10 @@
       50% { transform: translateY(-10px); }
     }
 
-    /* Modal */
     .modal {
       display: none;
       position: fixed;
-      z-index: 1;
+      z-index: 3;
       left: 0;
       top: 0;
       width: 100%;
@@ -126,23 +125,34 @@
       text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
       margin-top: 20px;
       max-width: 500px;
+      z-index: 2;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
     }
   </style>
 </head>
 <body>
+  <canvas id="stars"></canvas>
   <div id="container">
     <button id="clickButton">Haz clic aquí</button>
     <div id="surprise">
-      <div id="message">¡Feliz Cumpleaños Brayan!</div>
-      <div id="arrow">⬇️</div>
+      <div id="message">¡Feliz cumpleaños Brayan!</div>
       <img id="komodo" src="3cj8jo.gif" alt="Komodo de Mecanimales"/>
+      <div id="arrow">⬇️</div>
       <div id="finalMessage">
-        Sabes que eres una persona demasiado especial.<br><br>Mereces todo lo bueno que este mundo tiene para ofrecer<br><br>¡Te quiero muchísimo!<br><br>Felices 20 primaveras, hermosa vuelta al sol.<br><br>Atte: Dione
+        Sabes que eres una persona demasiado especial. Mereces todo lo bueno que este mundo tiene para ofrecer. ¡Te quiero muchísimo! Felices 20 primaveras, hermosa vuelta al sol.<br><br>— Atte: Dione
       </div>
     </div>
   </div>
 
-  <!-- Modal -->
   <div id="myModal" class="modal" style="display: none;">
     <div class="modal-content">
       <p>En el regalo está la clave</p>
@@ -183,7 +193,9 @@
       const pass = document.getElementById('password').value;
       if (pass === '03062025') {
         modal.style.display = 'none';
+        komodo.style.display = 'none';
         finalMessage.style.display = 'block';
+        startStars();
       } else {
         errorMsg.textContent = 'No es correcto, intenta de nuevo cumpleañero 🙃';
       }
@@ -194,6 +206,44 @@
         modal.style.display = "none";
         errorMsg.textContent = '';
       }
+    }
+
+    // Lluvia de brillitos (estrellas)
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function startStars() {
+      stars = Array(100).fill().map(() => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 1,
+        speedY: Math.random() * 0.7 + 0.3
+      }));
+      animateStars();
+    }
+
+    function animateStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#00ffff';
+      stars.forEach(star => {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+        star.y += star.speedY;
+        if (star.y > canvas.height) {
+          star.y = 0;
+          star.x = Math.random() * canvas.width;
+        }
+      });
+      requestAnimationFrame(animateStars);
     }
   </script>
 </body>
