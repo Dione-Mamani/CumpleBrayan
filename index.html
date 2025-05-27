@@ -120,12 +120,17 @@
 
     #finalMessage {
       display: none;
-      font-size: 1em;
-      color: #00ffff;
-      text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+      font-size: 1.2em;
+      color: white;
+      text-shadow: 0 0 10px white, 0 0 20px white;
+      background-color: rgba(30, 30, 47, 0.9);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #FFD700;
       margin-top: 20px;
       max-width: 500px;
       z-index: 2;
+      border: 2px solid #FFD700;
     }
 
     canvas {
@@ -148,7 +153,11 @@
       <div id="arrow">⬇️</div>
       <img id="komodo" src="3cj8jo.gif" alt="Komodo de Mecanimales"/>
       <div id="finalMessage">
-        Sabes que eres una persona demasiado especial.<br><br>Mereces todo lo bueno que este mundo tiene para ofrecer.<br><br>¡Te quiero muchísimo!<br><br>Felices 20 primaveras, hermosa vuelta al sol.<br><br> Atte: Dione
+        Sabes que eres una persona demasiado especial.<br><br>
+        Mereces todo lo bueno que este mundo tiene para ofrecer.<br><br>
+        ¡Te quiero muchísimo!<br><br>
+        Felices 20 primaveras, hermosa vuelta al sol.<br><br>
+        Atte: Dione
       </div>
     </div>
   </div>
@@ -208,7 +217,6 @@
       }
     }
 
-    // Lluvia de brillitos (estrellas)
     const canvas = document.getElementById('stars');
     const ctx = canvas.getContext('2d');
     let stars = [];
@@ -232,7 +240,7 @@
 
     function animateStars() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#00ffff';
+      ctx.fillStyle = '#FFD700';
       stars.forEach(star => {
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
